@@ -1,6 +1,15 @@
 enum Move {
     case playerX
     case playerO
+
+    var symbol: String {
+        switch self {
+            case .playerO:
+                return "O"
+            case .playerX:
+                return "X"
+        }
+    }
 }
 
 struct GameState {
