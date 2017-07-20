@@ -1,44 +1,39 @@
 enum Move {
-    case x
-    case o
+    case playerX
+    case playerO
 }
 
 struct GameState {
-    var state:[[Move?]]
-    
+    var state: [[Move?]]
+
     init(count: Int) {
-        state = Array(repeating: Array(repeating: nil , count: count), count: count)
+        state = Array(repeating: Array(repeating: nil, count: count), count: count)
     }
-    
-    mutating func addMove(row:Int, column:Int, move:Move) -> Bool {
+
+    mutating func addMove(row: Int, column: Int, move: Move) -> Bool {
         guard state[row][column] == nil else {
             return false
         }
         state[row][column] = move
         return true
     }
-    
+
     func hasWinner() -> Move? {
         let transposedState = transpose(input: state)
-        
-        
-        if state.contains(where: { $0.every { $0 == .x } })
-            || transposedState.contains(where: { $0.every { $0 == .x } }){
-            return .x
+
+        if state.contains(where: { $0.every { $0 == .playerX } })
+            || transposedState.contains(where: { $0.every { $0 == .playerX }}) {
+            return .playerX
         }
-        
-        if state.contains(where: { $0.every { $0 == .o } })
-            || transposedState.contains(where: { $0.every { $0 == .o } }) {
-            return .o
+
+        if state.contains(where: { $0.every { $0 == .playerO } })
+            || transposedState.contains(where: { $0.every { $0 == .playerO } }) {
+            return .playerO
         }
-    
-    
-        
-        // TODO: Check diaglonal winner
+
+        // XXX: Check diaglonal winner
         // pirmais masīva lodziņš + 1 katrai nākamajai rindai / pēdējais masīva lodziņs - 1 katrai nākamajai rindai
-        
-        
-        
+
         // Return nil if we have no winner
         return nil
     }
@@ -52,15 +47,14 @@ struct GameState {
 public func transpose<T>(input: [[T]]) -> [[T]] {
     if input.isEmpty { return [[T]]() }
     let count = input[0].count
-    
-    
+
     var out = Array(repeating: [T](), count: count)
     for outer in input {
         for (index, inner) in outer.enumerated() {
             out[index].append(inner)
         }
     }
-    
+
     return out
 }
 

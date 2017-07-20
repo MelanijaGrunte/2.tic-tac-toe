@@ -9,20 +9,17 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    
+
     override func loadView() {
         view = UIView()
-        
         view.backgroundColor = UIColor.black
-        
-        
+
         view.addSubview(button)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
-    
+
     private let button: UIButton = {
         let button = UIButton()
         button.setTitle("World", for: .normal)
@@ -31,31 +28,28 @@ class ViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 87)
         return button
     }()
-    
-    
+
     func tap() {
         button.setTitle("Mela", for: .normal)
     }
 }
 
-
 class GameSpaceView: UIView {
-    
+
     let move: Move?
-    
+
     init(move: Move? = nil) {
         self.move = move
         super.init(frame: .zero)
         setupView()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func setupView() {
-        
+
     }
-    
-    
+
 }
